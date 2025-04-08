@@ -53,7 +53,10 @@ export function ProfileSetupForm() {
 
     // If it's the last step, submit the form
     if (isLastStep) {
-      form.handleSubmit(onSubmit)();
+      const valid = await form.trigger();
+      if (valid) {
+        await onSubmit(form.getValues());
+      }
     } else {
       // Otherwise move to the next step
       setCurrentStep((prev) => prev + 1);
@@ -85,7 +88,7 @@ export function ProfileSetupForm() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           {steps.map((step, index) => (
-            <Fragment key={index}>
+            <div key={index} className="flex items-center flex-1">
               <div className="step-indicator flex flex-col items-center">
                 <div className={`w-8 h-8 flex items-center justify-center rounded-full mb-2 ${
                   index <= currentStep 
@@ -110,7 +113,7 @@ export function ProfileSetupForm() {
                   ></div>
                 </div>
               )}
-            </Fragment>
+            </div>
           ))}
         </div>
       </div>
