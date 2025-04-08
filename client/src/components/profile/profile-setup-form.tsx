@@ -42,20 +42,30 @@ export function ProfileSetupForm() {
 
   const isLastStep = currentStep === steps.length - 1;
 
-  const handleNext = async () => {
+  const handleNext = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    
     // Validate current step fields
     if (currentStep === 0) {
       const valid = await form.trigger(["business_name", "industry"]);
       if (!valid) return;
-    } else if (currentStep === 1) {
-      // Social media step has no required fields
     }
 
     // If it's the last step, submit the form
     if (isLastStep) {
       const valid = await form.trigger();
       if (valid) {
-        await onSubmit(form.getValues());
+        const data = form.getValues();
+        try {
+          if (!canCreateProfile) {
+            setShowLimitModal(true);
+            return;
+          }
+          await createProfile.mutateAsync(data);
+          setLocation("/dashboard");
+        } catch (error) {
+          console.error("Profile creation error:", error);
+        }
       }
     } else {
       // Otherwise move to the next step
@@ -119,7 +129,7 @@ export function ProfileSetupForm() {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form className="space-y-8">
           {currentStep === 0 && (
             <BasicInfoStep control={form.control} />
           )}
@@ -147,7 +157,7 @@ export function ProfileSetupForm() {
 
             <div className="ml-auto">
               <Button
-                type="button"
+                type="submit"
                 onClick={handleNext}
                 disabled={createProfile.isPending}
                 className="flex items-center"
