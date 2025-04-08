@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertBusinessProfileSchema } from "@shared/schema";
@@ -91,7 +91,7 @@ export function ProfileSetupForm() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           {steps.map((step, index) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <div className="step-indicator flex flex-col items-center">
                 <div className={`w-8 h-8 flex items-center justify-center rounded-full mb-2 ${
                   index <= currentStep 
@@ -117,7 +117,7 @@ export function ProfileSetupForm() {
                   ></div>
                 </div>
               )}
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
       </div>
