@@ -42,26 +42,30 @@ export function ProfileSetupForm() {
 
   const isLastStep = currentStep === steps.length - 1;
 
-  const handleNext = async (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleNext = async () => {
+    let isValid = false;
     
     // Validate current step fields
     if (currentStep === 0) {
-      const valid = await form.trigger(["business_name", "industry"]);
-      if (!valid) return;
+      isValid = await form.trigger(["business_name", "industry"]);
+    } else if (currentStep === 2) {
+      isValid = await form.trigger(["target_audience_description", "target_audience_keywords"]);
+    } else {
+      isValid = true; // Social media step is optional
     }
+
+    if (!isValid) return;
 
     // If it's the last step, submit the form
     if (isLastStep) {
       const valid = await form.trigger();
       if (valid) {
-        const data = form.getValues();
+        if (!canCreateProfile) {
+          setShowLimitModal(true);
+          return;
+        }
         try {
-          if (!canCreateProfile) {
-            setShowLimitModal(true);
-            return;
-          }
-          await createProfile.mutateAsync(data);
+          await createProfile.mutateAsync(form.getValues());
           setLocation("/dashboard");
         } catch (error) {
           console.error("Profile creation error:", error);
@@ -157,8 +161,8 @@ export function ProfileSetupForm() {
 
             <div className="ml-auto">
               <Button
-                type="button"
-                onClick={handleNext}
+                type="submit"
+                onClick={() => handleNext()}
                 disabled={createProfile.isPending}
                 className="flex items-center"
               >
