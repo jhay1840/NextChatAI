@@ -17,6 +17,7 @@ export function ProfileSetupForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const { createProfile, canCreateProfile } = useBusinessProfiles();
+  const { user } = useAuth();
   const [, setLocation] = useLocation();
 
   const form = useForm<InsertBusinessProfile>({
@@ -80,7 +81,10 @@ export function ProfileSetupForm() {
         
         try {
           console.log('Submitting form data...');
-          const formData = form.getValues();
+          const formData = {
+            ...form.getValues(),
+            user_id: user?.id
+          };
           console.log('Form data:', formData);
           await createProfile.mutateAsync(formData);
           console.log('Profile created successfully, redirecting...');
