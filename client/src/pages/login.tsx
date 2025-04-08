@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LoginForm } from "@/components/auth/login-form";
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
 import { RegisterForm } from "@/components/auth/register-form";
@@ -13,9 +13,14 @@ export default function LoginPage() {
   const { isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
 
-  // Redirect if already authenticated
+  // Redirect if authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      setLocation("/dashboard");
+    }
+  }, [isAuthenticated, setLocation]);
+
   if (isAuthenticated) {
-    setLocation("/dashboard");
     return null;
   }
 
@@ -30,7 +35,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold text-gray-900">PostPilot AI</h1>
           <p className="text-gray-600 mt-2">Automate Your Social Media Presence</p>
         </div>
-        
+
         {/* Login/Register/Forgot Password Card */}
         <Card className="shadow-lg">
           <CardContent className="p-6 md:p-8">

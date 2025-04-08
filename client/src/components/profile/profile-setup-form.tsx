@@ -77,7 +77,7 @@ export function ProfileSetupForm() {
 
       const values = form.getValues();
       await createProfile.mutateAsync(values);
-      
+
       // Redirect to dashboard after successful submission
       setLocation("/dashboard");
     } catch (error) {
@@ -108,7 +108,7 @@ export function ProfileSetupForm() {
                   {step.title}
                 </span>
               </div>
-              
+
               {index < steps.length - 1 && (
                 <div className="h-1 flex-1 bg-gray-200 mx-2">
                   <div 
@@ -127,15 +127,15 @@ export function ProfileSetupForm() {
           {currentStep === 0 && (
             <BasicInfoStep control={form.control} />
           )}
-          
+
           {currentStep === 1 && (
             <SocialMediaStep control={form.control} />
           )}
-          
+
           {currentStep === 2 && (
             <TargetAudienceStep control={form.control} />
           )}
-          
+
           <div className="flex justify-between pt-4 border-t border-gray-200 mt-8">
             {currentStep > 0 && (
               <Button
@@ -148,7 +148,7 @@ export function ProfileSetupForm() {
                 Previous
               </Button>
             )}
-            
+
             <div className="ml-auto">
               <Button
                 type="button"
