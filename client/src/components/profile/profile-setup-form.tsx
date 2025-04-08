@@ -129,7 +129,7 @@ export function ProfileSetupForm() {
       </div>
 
       <Form {...form}>
-        <form className="space-y-8">
+        <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
           {currentStep === 0 && (
             <BasicInfoStep control={form.control} />
           )}
@@ -157,7 +157,7 @@ export function ProfileSetupForm() {
 
             <div className="ml-auto">
               <Button
-                type="submit"
+                type="button"
                 onClick={handleNext}
                 disabled={createProfile.isPending}
                 className="flex items-center"
