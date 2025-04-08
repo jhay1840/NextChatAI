@@ -19,11 +19,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Configure session store
   const PgSession = connectPgSimple(session);
   const pgPool = new Pool({
-    host: process.env.PGHOST,
-    port: Number(process.env.PGPORT),
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    database: process.env.PGDATABASE,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false // Required for some PostgreSQL providers
+    }
   });
 
   // Session configuration
