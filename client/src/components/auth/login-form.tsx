@@ -13,9 +13,10 @@ import type { LoginCredentials } from "@shared/schema";
 
 interface LoginFormProps {
   onForgotPassword: () => void;
+  onSignUp: () => void;
 }
 
-export function LoginForm({ onForgotPassword }: LoginFormProps) {
+export function LoginForm({ onForgotPassword, onSignUp }: LoginFormProps) {
   const { login, googleLogin, facebookLogin } = useAuth();
   const [error, setError] = useState<string | null>(null);
 
@@ -61,8 +62,7 @@ export function LoginForm({ onForgotPassword }: LoginFormProps) {
             type="email"
             placeholder="name@example.com"
             {...register("email")}
-            error={errors.email?.message}
-            className="w-full"
+            className={`w-full ${errors.email ? "border-red-500" : ""}`}
           />
           {errors.email && (
             <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
@@ -88,8 +88,7 @@ export function LoginForm({ onForgotPassword }: LoginFormProps) {
             type="password"
             placeholder="••••••••"
             {...register("password")}
-            error={errors.password?.message}
-            className="w-full"
+            className={`w-full ${errors.password ? "border-red-500" : ""}`}
           />
           {errors.password && (
             <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
@@ -145,7 +144,11 @@ export function LoginForm({ onForgotPassword }: LoginFormProps) {
       
       <div className="mt-6 text-center text-sm">
         <span className="text-gray-600">Don't have an account?</span>
-        <Button variant="link" className="font-medium text-primary p-0 h-auto ml-1">
+        <Button 
+          variant="link" 
+          className="font-medium text-primary p-0 h-auto ml-1" 
+          onClick={onSignUp}
+        >
           Sign up
         </Button>
       </div>

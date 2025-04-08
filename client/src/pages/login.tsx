@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LoginForm } from "@/components/auth/login-form";
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
+import { RegisterForm } from "@/components/auth/register-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Layers } from "lucide-react";
 import { useAuth } from "@/lib/auth";
@@ -8,6 +9,7 @@ import { useLocation } from "wouter";
 
 export default function LoginPage() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
   const { isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
 
@@ -29,16 +31,21 @@ export default function LoginPage() {
           <p className="text-gray-600 mt-2">Automate Your Social Media Presence</p>
         </div>
         
-        {/* Login/Forgot Password Card */}
+        {/* Login/Register/Forgot Password Card */}
         <Card className="shadow-lg">
           <CardContent className="p-6 md:p-8">
             {showForgotPassword ? (
               <ForgotPasswordForm 
                 onBackToLogin={() => setShowForgotPassword(false)} 
               />
+            ) : showRegister ? (
+              <RegisterForm 
+                onBackToLogin={() => setShowRegister(false)} 
+              />
             ) : (
               <LoginForm 
-                onForgotPassword={() => setShowForgotPassword(true)} 
+                onForgotPassword={() => setShowForgotPassword(true)}
+                onSignUp={() => setShowRegister(true)}
               />
             )}
           </CardContent>
