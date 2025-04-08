@@ -1,0 +1,18 @@
+Warning: Cannot update a component (&#x60;LoginForm&#x60;) while rendering a different component (&#x60;LoginPage&#x60;). To locate the bad setState() call inside &#x60;LoginPage&#x60;, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
+    at LoginPage (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/src/pages/login.tsx:28:55)
+    at Route (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=c8b359ce:323:16)
+    at Switch (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=c8b359ce:379:17)
+    at Router
+    at QueryClientProvider (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=c8b359ce:2805:3)
+    at App
+Warning: Invalid prop &#x60;data-replit-metadata&#x60; supplied to &#x60;React.Fragment&#x60;. React.Fragment can only have &#x60;key&#x60; and &#x60;children&#x60; props.
+    at ProfileSetupForm (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/src/components/profile/profile-setup-form.tsx:33:41)
+    at div
+    at main
+    at div
+    at ProfileSetupPage (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/src/pages/profile-setup.tsx:28:69)
+    at Route (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=c8b359ce:323:16)
+    at Switch (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=c8b359ce:379:17)
+    at Router
+    at QueryClientProvider (https://f88671c9-bc7d-4a51-aa90-9a1a1e85cd83-00-196sdd738jz65.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=c8b359ce:2805:3)
+    at App
