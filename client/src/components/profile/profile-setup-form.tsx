@@ -24,6 +24,7 @@ export function ProfileSetupForm() {
   const form = useForm<InsertBusinessProfile>({
     resolver: zodResolver(insertBusinessProfileSchema),
     defaultValues: {
+      user_id: user?.id || '',
       business_name: "",
       profile_picture_url: "",
       industry: "",
