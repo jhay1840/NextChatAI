@@ -43,33 +43,44 @@ export function ProfileSetupForm() {
   const isLastStep = currentStep === steps.length - 1;
 
   const handleNext = async () => {
+    console.log('handleNext called, currentStep:', currentStep);
     let isValid = false;
     
     // Validate current step fields
     if (currentStep === 0) {
       isValid = await form.trigger(["business_name", "industry"]);
+      console.log('Basic info validation:', isValid);
     } else if (currentStep === 2) {
       isValid = await form.trigger(["target_audience_description", "target_audience_keywords"]);
+      console.log('Target audience validation:', isValid);
     } else {
       isValid = true; // Social media step is optional
+      console.log('Social media step - no validation needed');
     }
 
-    if (!isValid) return;
+    if (!isValid) {
+      console.log('Validation failed, stopping submission');
+      return;
+    }
 
     // If it's the last step, submit the form
     if (isLastStep) {
+      console.log('Last step reached, performing final validation');
       const valid = await form.trigger();
+      console.log('Final form validation:', valid);
       if (valid) {
         if (!canCreateProfile) {
+          console.log('Cannot create profile - showing limit modal');
           setShowLimitModal(true);
           return;
         }
         
         try {
-          // Submit the form data
+          console.log('Submitting form data...');
           const formData = form.getValues();
+          console.log('Form data:', formData);
           await createProfile.mutateAsync(formData);
-          // Force redirect to dashboard after successful creation
+          console.log('Profile created successfully, redirecting...');
           window.location.href = "/dashboard";
         } catch (error) {
           console.error("Profile creation error:", error);
