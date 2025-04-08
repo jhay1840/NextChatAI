@@ -64,20 +64,14 @@ export function ProfileSetupForm() {
     setCurrentStep((prev) => Math.max(0, prev - 1));
   };
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data: InsertBusinessProfile) => {
     if (!canCreateProfile) {
       setShowLimitModal(true);
       return;
     }
 
     try {
-      // Check if form is valid before submission
-      const valid = await form.trigger();
-      if (!valid) return;
-
-      const values = form.getValues();
-      await createProfile.mutateAsync(values);
-
+      await createProfile.mutateAsync(data);
       // Redirect to dashboard after successful submission
       setLocation("/dashboard");
     } catch (error) {
@@ -122,7 +116,7 @@ export function ProfileSetupForm() {
       </div>
 
       <Form {...form}>
-        <form className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           {currentStep === 0 && (
             <BasicInfoStep control={form.control} />
           )}
