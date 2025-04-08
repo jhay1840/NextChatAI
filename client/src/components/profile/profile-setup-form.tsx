@@ -67,6 +67,9 @@ export function ProfileSetupForm() {
     if (isLastStep) {
       console.log('Last step reached, performing final validation');
       const valid = await form.trigger();
+      const errors = form.formState.errors;
+      console.log('Form errors:', errors);
+      console.log('Form values:', form.getValues());
       console.log('Final form validation:', valid);
       if (valid) {
         if (!canCreateProfile) {
