@@ -53,7 +53,7 @@ export function ProfileSetupForm() {
 
     // If it's the last step, submit the form
     if (isLastStep) {
-      await handleSubmit();
+      form.handleSubmit(onSubmit)();
     } else {
       // Otherwise move to the next step
       setCurrentStep((prev) => prev + 1);
