@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertBusinessProfileSchema } from "@shared/schema";
 import { useBusinessProfiles } from "@/lib/db";
+import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useLocation } from "wouter";
