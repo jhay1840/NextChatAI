@@ -108,7 +108,6 @@ export function ProfileSetupForm() {
                   {step.title}
                 </span>
               </div>
-
               {index < steps.length - 1 && (
                 <div className="h-1 flex-1 bg-gray-200 mx-2">
                   <div 
