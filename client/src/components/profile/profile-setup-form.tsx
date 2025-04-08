@@ -64,9 +64,13 @@ export function ProfileSetupForm() {
           setShowLimitModal(true);
           return;
         }
+        
         try {
-          await createProfile.mutateAsync(form.getValues());
-          setLocation("/dashboard");
+          // Submit the form data
+          const formData = form.getValues();
+          await createProfile.mutateAsync(formData);
+          // Force redirect to dashboard after successful creation
+          window.location.href = "/dashboard";
         } catch (error) {
           console.error("Profile creation error:", error);
         }
