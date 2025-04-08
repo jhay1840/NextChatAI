@@ -23,7 +23,7 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <style jsx global>{`
+      <style>{`
         body {
           font-family: 'Space Grotesk', sans-serif;
           background-color: #f8fafc;
