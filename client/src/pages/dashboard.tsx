@@ -34,7 +34,40 @@ export default function DashboardPage() {
     );
   }
 
-  const currentProfile = profiles[0]; // Display first profile for now
+  // Only get current profile if profiles exist and have items
+  const currentProfile = profiles && profiles.length > 0 ? profiles[0] : null;
+
+  // If no profile exists, show a message
+  if (!currentProfile) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <header className="bg-white shadow-sm border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16 items-center">
+              <div className="flex items-center">
+                <div className="flex-shrink-0 flex items-center">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white">
+                    <Layers className="h-5 w-5" />
+                  </div>
+                  <span className="ml-3 text-xl font-bold text-gray-900">PostPilot AI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-xl font-bold text-gray-900 mb-2">No Business Profile Found</h2>
+            <p className="text-gray-600 mb-4">Please set up your business profile to continue</p>
+            <Button onClick={() => setLocation("/profile-setup")}>
+              <Plus className="h-4 w-4 mr-2" />
+              Create Business Profile
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
