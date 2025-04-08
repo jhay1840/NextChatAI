@@ -1,0 +1,87 @@
+"You are an expert full-stack developer specializing in Next.js, JavaScript, Node.js, PostgreSQL, Hero UI, and Shadcn UI. You are tasked with building the initial authentication and business profile setup for PostPilot AI, a SaaS platform for automated social media management.
+App Summary:
+PostPilot AI is a SaaS platform designed to automate social media post scheduling with AI-driven content generation, hashtag optimization, image suggestions, and trend analysis. It targets small businesses, influencers, and social media agencies, aiming to streamline their content creation process and optimize engagement.
+Mission Statement: To empower businesses and content creators by automating social media posting with AI-driven insights, maximizing engagement while saving time.
+Tech Stack:
+Next.js (latest version)
+JavaScript (ES6+)
+Node.js
+PostgreSQL
+Hero UI (for base styling and component primitives)
+Shadcn UI (for accessible and reusable UI components)
+Space Grotesk font (globally applied)
+Mobile-first Design
+User Types:
+Free: Limited to 1 business profile.
+Starter: (Assume for later functionality) - More business profiles.
+Pro: (Assume for later functionality) - Unlimited business profiles, advanced features.
+Task:
+Login Page: Create a complete and functional login page with the following features:
+UI: Clean and modern design using Hero UI and Shadcn UI components. Use the Space Grotesk font. Mobile-first design principles are crucial. The overall aesthetic should be welcoming and professional. Consider a subtle background pattern or image related to social media or AI.
+Authentication Methods:
+Standard email/password login.
+Google OAuth integration.
+Facebook OAuth integration.
+Password Management:
+"Forgot Password" link that initiates a password reset flow (implementation of the actual email sending and password reset logic can be stubbed for now, focus on the UI and basic functionality).
+(Optional) Consider adding "Remember Me" functionality.
+Error Handling: Display clear and user-friendly error messages for invalid credentials or authentication failures.
+Accessibility: Ensure the login page is fully accessible, following WCAG guidelines.
+Business Profile Multi-Step Form (After Login): Implement a multi-step form (similar to Typeform in structure and flow) for setting up a business profile after a user successfully logs in. The form should capture the following information:
+Step 1: Basic Information
+Business Name (required)
+Profile Picture (image upload, implement basic client-side preview)
+Industry (dropdown list with common industry options)
+Step 2: Social Media Handles
+(Input fields for) Facebook Page URL
+(Input fields for) Twitter Handle
+(Input fields for) Instagram Handle
+(Input fields for) LinkedIn Page URL
+(Consider a dynamic "Add Social Media" button to allow adding more profiles, but for now, focus on these 4)
+Step 3: Target Audience
+Short description of the target audience (text area).
+Keywords related to the target audience (comma-separated input field - think tags).
+Form Logic:
+Implement basic form validation for required fields and URL format.
+Implement navigation between steps (Previous/Next buttons).
+Upon successful submission, store the profile data in the PostgreSQL database, associated with the logged-in user.
+Free User Restriction: If the user is of type "Free," check if they already have a business profile. If they do, display a message indicating they can only have one profile and redirect them to a dashboard (the dashboard doesn't need to be implemented yet, just a placeholder).
+Database Schema (PostgreSQL): Define the necessary tables and fields for users and business profiles:
+users table:
+id (UUID, primary key)
+email (string, unique)
+password (string, hashed)
+user_type (enum: free, starter, pro, default: free)
+google_id (string, nullable)
+facebook_id (string, nullable)
+created_at (timestamp)
+updated_at (timestamp)
+business_profiles table:
+id (UUID, primary key)
+user_id (UUID, foreign key referencing users.id)
+business_name (string)
+profile_picture_url (string, URL to the image in storage - assume storage is configured elsewhere)
+industry (string)
+facebook_page_url (string, nullable)
+twitter_handle (string, nullable)
+instagram_handle (string, nullable)
+linkedin_page_url (string, nullable)
+target_audience_description (text)
+target_audience_keywords (string, comma-separated)
+created_at (timestamp)
+updated_at (timestamp)
+Implementation Details:
+Directory Structure: Organize the code into logical directories (e.g., pages/auth, components/forms, lib/db, lib/auth).
+Authentication Library: Use a well-established authentication library like NextAuth.js for handling authentication. Configure it for email/password, Google, and Facebook authentication.
+Database Connection: Establish a connection to the PostgreSQL database using a suitable Node.js library (e.g., pg, node-postgres, or an ORM like Prisma or Sequelize if you prefer). Ensure environment variables are used for database credentials.
+Shadcn UI: Leverage Shadcn UI components for common UI elements like buttons, inputs, forms, alerts, etc. Customize the theme to fit the PostPilot AI brand.
+Hero UI: Use Hero UI for layout, basic styling, and low-level component primitives as needed.
+
+Success Criteria:
+A fully functional login page with all specified authentication methods and password management.
+A well-structured multi-step form for capturing business profile information.
+Correct database schema and data storage.
+Clear, maintainable, and well-commented code.
+A responsive and user-friendly design that adheres to mobile-first principles.
+Proper error handling and user feedback.
+Start by creating the database schema and then scaffolding the login page with basic email/password authentication."
